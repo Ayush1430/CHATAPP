@@ -18,17 +18,14 @@ const app = express();
 const PORT = process.env.PORT;
 
 const httpServer = http.createServer(app);
-const io = new Server(httpServer, {
-  cors: {
-    origin: ["https://chatapp-sand-rho.vercel.app/"],
-    methods: ["GET", "POST"]
-  }
-});
+const io = new Server(httpServer);
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-app.use(cors());
+app.use(cors({
+  origin: ["https://chatapp-sand-rho.vercel.app/"]
+}));
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });

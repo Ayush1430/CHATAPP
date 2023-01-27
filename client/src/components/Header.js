@@ -19,7 +19,7 @@ export default function Header({ socket, userId, setUserId }) {
 
   useEffect(() => {
     async function fetchRooms() {
-      const res = await fetch("https://chatapp-fs35.onrender.com/rooms");
+      const res = await fetch("https://chatapp-fs35.onrender.com/rooms", { mode: "no-cors" });
       const { rooms } = await res.json();
       setRooms(rooms);
     }
