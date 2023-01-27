@@ -21,7 +21,8 @@ const httpServer = http.createServer(app);
 const io = new Server(httpServer, {
   cors: {
     origin: ["https://chatapp-sand-rho.vercel.app/"],
-  },
+    methods: ["GET", "POST"]
+  }
 });
 
 const __filename = fileURLToPath(import.meta.url);
