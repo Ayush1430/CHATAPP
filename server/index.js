@@ -16,16 +16,20 @@ await mongoose.connect(
 //mongodb+srv://bitfumes123:bitfumes123@cluster0.yk0jpvz.mongodb.net/?retryWrites=true&w=majority
 const app = express();
 const PORT = process.env.PORT;
-
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+  res.header("Access-Control-Allow-Methods", "PUT, GET, POST, DELETE, OPTIONS");
+  next();
+});
 const httpServer = http.createServer(app);
-const io = new Server(httpServer);
+const io = new Server(httpServer,{log:false, origins:'*:*'});
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-app.use(cors({
-  origin: ["https://chatapp-sand-rho.vercel.app"]
-}));
+app.use(cors());
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });

@@ -11,7 +11,7 @@ function App() {
   const [userId, setUserId] = useState(null);
 
   useEffect(() => {
-    setSocket(io("https://chatapp-fs35.onrender.com"));
+    setSocket(io('https://chatapp-fs35.onrender.com', {transports: ['polling']}));
     const _userId = Cookies.getItem("userId");
     if (_userId) setUserId(_userId);
   }, []);
